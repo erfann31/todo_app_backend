@@ -135,5 +135,5 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 CORS_ORIGIN_ALLOW_ALL = True
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 BASE_URL = os.getenv('BASE_URL')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
