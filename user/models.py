@@ -30,3 +30,15 @@ class CustomUser(AbstractBaseUser):
 
     def __str__(self):
         return self.email
+
+    @staticmethod
+    def has_perm(perm, obj=None):
+        return True
+
+    @staticmethod
+    def has_module_perms(app_label):
+        return True
+
+    @property
+    def is_staff(self):
+        return self.is_admin
