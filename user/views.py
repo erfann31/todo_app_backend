@@ -23,7 +23,8 @@ class SignUpAPIView(APIView):
 class LoginAPIView(APIView):
     permission_classes = [AllowAny]
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
             email = serializer.validated_data['email']
