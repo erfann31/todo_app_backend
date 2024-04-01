@@ -10,7 +10,8 @@ from .serializers import TaskSerializer
 class TaskCreateAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         serializer = TaskSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
@@ -21,7 +22,8 @@ class TaskCreateAPIView(APIView):
 class TaskCompleteAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, task_id):
+    @staticmethod
+    def get(request, task_id):
         try:
             task = Task.objects.get(id=task_id, user=request.user)
         except Task.DoesNotExist:
@@ -36,7 +38,8 @@ class TaskCompleteAPIView(APIView):
 class TaskDeleteAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request, task_id):
+    @staticmethod
+    def delete(request, task_id):
         try:
             task = Task.objects.get(id=task_id, user=request.user)
         except Task.DoesNotExist:
@@ -49,7 +52,8 @@ class TaskDeleteAPIView(APIView):
 class TaskListAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
         tasks = Task.objects.filter(user=request.user)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data)
@@ -58,7 +62,8 @@ class TaskListAPIView(APIView):
 class CompletedTaskListAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
         tasks = Task.objects.filter(user=request.user, completed=True)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data)
@@ -67,7 +72,8 @@ class CompletedTaskListAPIView(APIView):
 class UncompletedTaskListAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
         tasks = Task.objects.filter(user=request.user, completed=False)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data)
