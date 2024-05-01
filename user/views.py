@@ -1,9 +1,10 @@
+from django.contrib.auth import authenticate
 from rest_framework import status
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
-from django.contrib.auth import authenticate
+
 from .serializers import UserSerializer, LoginSerializer
 
 
@@ -17,7 +18,9 @@ class SignUpAPIView(APIView):
             user = serializer.save()
             if user:
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            errors = [error[0] for error in serializer.errors.values()]
+            return Response({"error": errors[0]}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginAPIView(APIView):
