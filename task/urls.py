@@ -6,11 +6,12 @@ from .views import (
     TaskDeleteAPIView,
     TaskListAPIView,
     CompletedTaskListAPIView,
-    UncompletedTaskListAPIView,
+    UncompletedTaskListAPIView, TaskDetailAPIView,
 )
 
 urlpatterns = [
     path('create/', TaskCreateAPIView.as_view(), name='task-create'),
+    path('edit/<int:task_id>/', TaskDetailAPIView.as_view(), name='task-detail'),
     path('complete/<int:task_id>/', TaskCompleteAPIView.as_view(), name='task-complete'),
     path('delete/<int:task_id>/', TaskDeleteAPIView.as_view(), name='task-delete'),
     path('list/', TaskListAPIView.as_view(), name='task-list'),
