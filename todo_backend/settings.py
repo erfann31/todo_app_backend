@@ -1,6 +1,7 @@
 
 import os
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -115,6 +116,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+
+CSRF_TRUSTED_ORIGINS = ['*']
 
 TIME_ZONE = 'UTC'
 
